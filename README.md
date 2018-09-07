@@ -100,7 +100,7 @@ chmod u+x sdc-dot-waze-poll-for-batches-to-manifest.sh
 **Step 4** Run the script file
 ./sdc-dot-waze-poll-for-batches-to-manifest.sh
 
-**Step 5**: Upload the sdc-dot-manifest-generator.zip generated from Step 4 to a lambda function via aws console.
+**Step 5**: Upload the sdc-dot-waze-poll-for-batches-to-manifest.zip generated from Step 4 to a lambda function via aws console.
 
 [Back to top](#toc)
 
