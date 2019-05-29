@@ -1,4 +1,6 @@
-
+[![Build Status](https://travis-ci.com/usdot-jpo-sdc/sdc-dot-waze-poll-for-batches-to-manifest.svg?branch=master)](https://travis-ci.com/usdot-jpo-sdc/sdc-dot-waze-poll-for-batches-to-manifest)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=usdot-jpo-sdc_sdc-dot-waze-poll-for-batches-to-manifest&metric=alert_status)](https://sonarcloud.io/dashboard?id=usdot-jpo-sdc_sdc-dot-waze-poll-for-batches-to-manifest)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=usdot-jpo-sdc_sdc-dot-waze-poll-for-batches-to-manifest&metric=coverage)](https://sonarcloud.io/dashboard?id=usdot-jpo-sdc_sdc-dot-waze-poll-for-batches-to-manifest)
 # sdc-dot-waze-poll-for-batches-to-manifest
 This lambda function is responsible for polling the batches to start the manifest generation process.
 
