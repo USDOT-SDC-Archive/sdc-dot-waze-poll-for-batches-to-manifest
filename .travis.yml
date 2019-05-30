@@ -12,8 +12,6 @@ branches:
         - develop
 addons:
     sonarcloud:
-        organization: "usdot-jpo-sdc"
-        token:
-            secure: "CJd4Pyvw98Q7teXnkxVF7Y8LP+P1G69LAK6PI2TwG+AJmNeBTop+MPOswHvjHUpNAFdQhVZiRwlOvwinY14k82zDyQ4+jcnLVHU3bYudSw2CjtuaWXFQ3Uyuex9vShkQxvePZgjdKZwM9mQe9MPqF0E//ev6ryYCX9UxVdNjZKvMbtLEdI4Lci/WEks2R8ZWwjk/h0jFZEJQeWzlb3qzli0+4fvlWbC8QUFejNxDnIcDrfdOSItfaTvT0llqYRAsNheGdaguReFcxm2QXDT0u4K/CKfvC9KKiG8bLEn0omwXSodF7aMshrs5qDqF4S0vvwtedUrr+o3H01/0CC36hXyAAJP+lCjHxdQBA423VE/qaj/pTKz2eWz0vy1UXgegW3XNtAs2NHKM+1d5HJ0d3t4jtEiPRSyrJlCGQd89CcXdSZwoPCDDlONFX/ImTWj633sO7hWR+JhAlmunV8o/IWUIiV2m7jKnQHad9QtzR/HO3JayfzbphxVM3PRsHZ7QLK/ZjU6AFJcpFY/8hHz9dVqU2yfrGtu63K8UkIPZEwNCLYLPLWCv3SFuhunCcO/nUsCixaQmu/LCqhdnhvuUwd5eGzt1MSgEN3ReQJh5H5rNt5pVqd55+FMgcHHX7Ie5PPvcsj9SUBDUIaP1x5fEyTGVD8HNCSPZpCQmaTtu4QQ="
+        organization: "usdot-jpo-sdc-projects"
 script: 
     - sonar-scanner
