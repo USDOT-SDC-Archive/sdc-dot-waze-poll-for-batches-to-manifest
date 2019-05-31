@@ -15,8 +15,8 @@ branches:
 addons:
     sonarcloud:
         organization: "usdot-jpo-sdc-projects"
-     token:
+    token:
         secure:$SONAR_TOKEN
-script:
+script: 
     - coverage erase
     - sonar-scanner
