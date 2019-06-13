@@ -10,3 +10,4 @@
 .coverage
 html_coverage_reports/**
 
+raise
