@@ -2,3 +2,12 @@
 ._.DS_Store
 **/.DS_Store
 **/._.DS_Store
+**/__pycache__/**
+**.pyc
+**/**.pyc
+.idea/
+.pytest_cache/**
+.coverage
+html_coverage_reports/**
+
+raise

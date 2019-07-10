@@ -13,11 +13,11 @@ branches:
     only:
         - master
         - develop
-
 addons:
     sonarcloud:
         organization: "usdot-jpo-sdc-projects"
 script: 
     - coverage erase
+    - coverage run -m pytest ./tests/
     - coverage xml -i
     - sonar-scanner -X -D sonar.login=$SONAR_TOKEN
