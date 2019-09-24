@@ -30,7 +30,7 @@ def test_poll_for_batches_not_historical():
         queue_event["is_historical"] = "false"
         queue_event["BatchId"] = str(int(time.time()))
         poll_manifests_to_process_obj = SqsHandler()
-        poll_manifests_to_process_obj.poll_for_batches(queue_event, None)
+        poll_manifests_to_process_obj.poll_for_batches(queue_event)
 
 
 @mock_sqs
@@ -41,7 +41,7 @@ def test_poll_for_batches_historical():
         queue_event["is_historical"] = "true"
         queue_event["BatchId"] = str(int(time.time()))
         poll_manifests_to_process_obj = SqsHandler()
-        poll_manifests_to_process_obj.poll_for_batches(queue_event, None)
+        poll_manifests_to_process_obj.poll_for_batches(queue_event)
 
 
 @mock_sqs
@@ -59,7 +59,7 @@ def test_poll_for_batches_historical_status_assigned(monkeypatch):
     queue_event["BatchId"] = str(int(time.time()))
     poll_manifests_to_process_obj = SqsHandler()
 
-    data = poll_manifests_to_process_obj.poll_for_batches(queue_event, None)
+    data = poll_manifests_to_process_obj.poll_for_batches(queue_event)
     assert data["is_historical"] == queue_event["is_historical"].lower()
 
 
@@ -102,7 +102,7 @@ def test_poll_for_batches_batches_not_in_event(monkeypatch):
     queue_event["is_historical"] = "false"
     poll_manifests_to_process_obj = SqsHandler()
 
-    data = poll_manifests_to_process_obj.poll_for_batches(queue_event, None)
+    data = poll_manifests_to_process_obj.poll_for_batches(queue_event)
 
     assert data["batch_id"] == "test_batch_id"
     assert data["queueUrl"] == "test_queue_url"
@@ -112,4 +112,4 @@ def test_poll_for_batches_batches_not_in_event(monkeypatch):
 @mock_events
 def test_get_batches():
     with pytest.raises(Exception):
-        assert SqsHandler.get_batches(None, None) is None
+        assert SqsHandler.get_batches(None) is None
