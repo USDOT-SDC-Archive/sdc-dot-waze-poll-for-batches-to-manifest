@@ -18,17 +18,16 @@ class SqsHandler:
         :param message: dict
         """
 
-        response = client.publish(
+        client.publish(
             TargetArn=os.environ['BATCH_NOTIFICATION_SNS'],
             Message=json.dumps({'default': json.dumps(message)}),
             MessageStructure='json'
         )
 
-    def poll_for_batches(self, event, context):
+    def poll_for_batches(self, event):
         """
         gets the messages from the data persistence queue to start the persistence in Redshift
         :param event: a dictionary, or a list of a dictionary, that contains information on a batch
-        :param context:
         :return:
         """
         try:
@@ -46,11 +45,11 @@ class SqsHandler:
             # if no batch id assigned, gather batch_id, queueUrl, and receiptHandle from the messages in the queue.
             if 'BatchId' not in event:
                 for message in queue.receive_messages():
-                    jsonBody = json.loads(message.body)
-                    data["batch_id"] = jsonBody["BatchId"]
+                    json_body = json.loads(message.body)
+                    data["batch_id"] = json_body["BatchId"]
                     data["queueUrl"] = message.queue_url
                     data["receiptHandle"] = message.receipt_handle
-                    LoggerUtility.logInfo("Batch {} retrieved for processing".format(jsonBody["BatchId"]))
+                    LoggerUtility.logInfo("Batch {} retrieved for processing".format(json_body["BatchId"]))
                     break
 
             # Otherwise, only assign the BatchId from the event.
@@ -65,11 +64,11 @@ class SqsHandler:
             LoggerUtility.logError("Error polling for batches")
             raise e
     
-    def get_batches(self, event, context):
+    def get_batches(self, event):
         """
         Executes poll_for_batches
         :param event: a dictionary, or a list of a dictionary, that contains information on a batch
         :param context:
         :return:
         """
-        return self.poll_for_batches(event, context)
+        return self.poll_for_batches(event)
