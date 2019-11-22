@@ -4,7 +4,7 @@ python:
 install:
     - pip install boto3
     - pip install utils
-    - pip install moto
+    - pip install moto==1.3.13
     - pip install psycopg2
     - pip install coverage
     - pip install pytest
