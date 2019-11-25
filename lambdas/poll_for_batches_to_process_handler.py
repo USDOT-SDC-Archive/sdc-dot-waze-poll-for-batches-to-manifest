@@ -1,8 +1,9 @@
-import boto3
 import json
 import os
-from common.logger_utility import *
-from common.constants import *
+
+import boto3
+
+from common.logger_utility import LoggerUtility
 
 client = boto3.client('sns', region_name='us-east-1')
 
@@ -63,7 +64,7 @@ class SqsHandler:
         except Exception as e:
             LoggerUtility.logError("Error polling for batches")
             raise e
-    
+
     def get_batches(self, event):
         """
         Executes poll_for_batches
