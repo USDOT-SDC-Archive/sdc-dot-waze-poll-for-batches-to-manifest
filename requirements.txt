@@ -1,6 +1,6 @@
 boto3
 utils
-moto==1.3.13
+moto
 psycopg2-binary
 coverage
 pytest
