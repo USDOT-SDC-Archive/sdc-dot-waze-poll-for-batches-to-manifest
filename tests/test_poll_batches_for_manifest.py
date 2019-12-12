@@ -18,6 +18,7 @@ os.environ['AWS_SECRET_ACCESS_KEY'] = 'dummy-access-key-secret'
 os.environ['AWS_DEFAULT_REGION'] = 'us-east-1'
 os.environ['BOTO_CONFIG'] = '/dev/null'
 os.environ['BATCH_NOTIFICATION_SNS'] = "batch_notification_sns"
+os.environ["manifest_sqs"] = "manifest_sqs.fifo"
 
 
 class MockSNS:
@@ -37,23 +38,22 @@ def test_publish_message_to_sns():
 @mock_sqs
 def test_poll_for_batches_not_historical():
     with pytest.raises(ClientError):
-        os.environ["manifest_sqs"] = "dev-dot-sdc-curated-batches.fifo"
         queue_event = dict()
         queue_event["is_historical"] = "false"
         queue_event["BatchId"] = str(int(time.time()))
         poll_manifests_to_process_obj = SqsHandler()
-        poll_manifests_to_process_obj.poll_for_batches(queue_event)
+        poll_manifests_to_process_obj.poll_for_batches(queue_event, None)
 
 
 @mock_sqs
 def test_poll_for_batches_historical():
     with pytest.raises(Exception):
-        os.environ["persistence_historical_sqs"] = "dev-dot-sdc-waze-data-historical-persistence-orchestration"
+        os.environ["persistence_historical_sqs"] = "persistence_historical_sqs"
         queue_event = dict()
         queue_event["is_historical"] = "true"
         queue_event["BatchId"] = str(int(time.time()))
         poll_manifests_to_process_obj = SqsHandler()
-        poll_manifests_to_process_obj.poll_for_batches(queue_event)
+        poll_manifests_to_process_obj.poll_for_batches(queue_event, None)
 
 
 @mock_sqs
@@ -62,7 +62,6 @@ def test_poll_for_batches_historical_status_assigned(monkeypatch):
         pass
 
     monkeypatch.setattr(SqsHandler, "publish_message_to_sns", mock_publish_message)
-    os.environ["manifest_sqs"] = "dev-dot-sdc-curated-batches.fifo"
     sqs = boto3.resource('sqs', region_name='us-east-1')
     sqs.create_queue(QueueName=os.environ["manifest_sqs"])
     queue_event = dict()
@@ -70,7 +69,7 @@ def test_poll_for_batches_historical_status_assigned(monkeypatch):
     queue_event["BatchId"] = str(int(time.time()))
     poll_manifests_to_process_obj = SqsHandler()
 
-    data = poll_manifests_to_process_obj.poll_for_batches(queue_event)
+    data = poll_manifests_to_process_obj.poll_for_batches(queue_event, None)
     assert data["is_historical"] == queue_event["is_historical"].lower()
 
 
@@ -106,13 +105,12 @@ def test_poll_for_batches_batches_not_in_event(monkeypatch):
     monkeypatch.setattr(json, "loads", mock_json_loads)
     monkeypatch.setattr(SqsHandler, "publish_message_to_sns", mock_publish_message)
 
-    os.environ["manifest_sqs"] = "dev-dot-sdc-curated-batches.fifo"
     boto3.setup_default_session()
     queue_event = dict()
     queue_event["is_historical"] = "false"
     poll_manifests_to_process_obj = SqsHandler()
 
-    data = poll_manifests_to_process_obj.poll_for_batches(queue_event)
+    data = poll_manifests_to_process_obj.poll_for_batches(queue_event, None)
 
     assert data["batch_id"] == "test_batch_id"
     assert data["queueUrl"] == "test_queue_url"
@@ -122,4 +120,4 @@ def test_poll_for_batches_batches_not_in_event(monkeypatch):
 def test_get_batches():
     sqs_handler = SqsHandler()
     sqs_handler.poll_for_batches = MagicMock()
-    sqs_handler.get_batches(None)
+    sqs_handler.get_batches(None, None)
