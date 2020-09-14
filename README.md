@@ -1,6 +1,12 @@
-[![Build Status](https://travis-ci.org/usdot-jpo-sdc-projects/sdc-dot-waze-poll-for-batches-to-manifest.svg?branch=master)](https://travis-ci.org/usdot-jpo-sdc-projects/sdc-dot-waze-poll-for-batches-to-manifest)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=usdot-jpo-sdc-projects_sdc-dot-waze-poll-for-batches-to-manifest&metric=coverage)](https://sonarcloud.io/dashboard?id=usdot-jpo-sdc-projects_sdc-dot-waze-poll-for-batches-to-manifest)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=usdot-jpo-sdc-projects_sdc-dot-waze-poll-for-batches-to-manifest&metric=alert_status)](https://sonarcloud.io/dashboard?id=usdot-jpo-sdc-projects_sdc-dot-waze-poll-for-batches-to-manifest)
+# This repository is DEPRECATED!
+
+This repository is deprecated as of **08/05/2020**.
+
+The code and infrastructure has moved to https://github.com/usdot-jpo-sdc-projects/sdc-dot-waze-pipeline
+
+Please refer to the waze pipeline repo for all future development.
+
+
 # sdc-dot-waze-poll-for-batches-to-manifest
 This lambda function is responsible for polling the batches to start the manifest generation process.
 
